@@ -16,6 +16,7 @@ alias v='nvim'
 alias v.='nvim .'
 alias pdf='zathura'
 alias bt='btop'
+alias mvswap='mv --exchange' # atomically swap two files (GNU coreutils >= 9.5)
 
 alias m='mise'
 alias mx='mise exec'
@@ -118,7 +119,6 @@ alias dt='difft'
 
 # Always start ipython with current venv
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
-alias univpn='sudo openconnect vpn.hiz-saarland.de --authgroup UdS -u s8jjmeye '
 alias nonzero_mean="grep -rnPo ' \"mean\": (?!0\\.0\\b,)[0-9]+(?:\\.[0-9]+)?'"
 
 # suffix aliases

@@ -2,3 +2,5 @@
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(mise activate zsh --shims)"
+
+export PATH="$HOME/.elan/bin:$PATH"

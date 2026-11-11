@@ -67,6 +67,9 @@ export VIMTEX_OUTPUT_DIRECTORY='out'
 # XCompose
 export XCOMPOSEFILE='$XDG_CONFIG_HOME/XCompose'
 
+# mbsync: macOS libsasl loads the XOAUTH2 plugin (cyrus-sasl-xoauth2) from here
+export SASL_PATH="$HOME/.local/lib/sasl2"
+
 # Google Cloud
 export GOOGLE_CLOUD_PROJECT="see-far"
 

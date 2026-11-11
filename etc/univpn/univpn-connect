@@ -1,0 +1,4 @@
+#!/bin/sh
+# Delete any leftover route to the VPN server from an earlier session
+for ip in $(dig +short vpn.hiz-saarland.de); do route -n delete -host "$ip" >/dev/null 2>&1; done
+exec /opt/homebrew/bin/openconnect vpn.hiz-saarland.de --authgroup UdS -u s8jjmeye --passwd-on-stdin

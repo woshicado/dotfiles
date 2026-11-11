@@ -30,6 +30,8 @@ map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 -- stylua: ignore
 map({ "n", "t" }, "<M-i>", function() require("floatterm").toggle() end,
 	{ desc = "terminal toggle floating term" })
+map({ "n", "x" }, "g<C-g>", function() require("wordcount").show() end,
+	{ desc = "buffer/selection word count float" })
 
 map({ "i", "v", "n" }, "<Up>", "<Nop>")
 map({ "i", "v", "n" }, "<Down>", "<Nop>")

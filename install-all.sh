@@ -33,6 +33,9 @@ fi
 chmod +x ./dot-claude/review-bot/install.sh
 ./dot-claude/review-bot/install.sh
 
+chmod +x ./dot-claude/nudge/install.sh
+./dot-claude/nudge/install.sh
+
 # Agent skills (private submodule): custom ones linked, upstream ones via npx skills.
 if command -v mise >/dev/null 2>&1; then
   mise run skills || echo "!! skills install failed (private submodule unreachable?) — rerun: mise run skills"

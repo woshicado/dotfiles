@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.joshua.mbsync</string>
+    <string>com.joshua.mail-sync</string>
 
     <key>ProgramArguments</key>
     <array>
@@ -12,7 +12,7 @@
         <string>/tmp/mbsync.lock</string>
         <string>/bin/bash</string>
         <string>-lc</string>
-        <string>/opt/homebrew/bin/sops exec-env ~/secrets.env "/opt/homebrew/bin/mbsync -a && /opt/homebrew/bin/notmuch new"</string>
+        <string>/opt/homebrew/bin/sops exec-env /Users/joshua/secrets.env "/opt/homebrew/bin/mbsync -a; /opt/homebrew/bin/notmuch new"</string>
     </array>
 
     <key>StartInterval</key>
@@ -33,6 +33,11 @@
         <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/Users/joshua/.local/share/mise/shims:</string>
         <key>HOME</key>
         <string>/Users/joshua</string>
+        <key>GNUPGHOME</key>
+        <string>/Users/joshua/.gnupg</string>
+        <!-- Homebrew's isync links macOS's libsasl, which needs the XOAUTH2 plugin from here (DFKI) -->
+        <key>SASL_PATH</key>
+        <string>/Users/joshua/.local/lib/sasl2</string>
     </dict>
 </dict>
 </plist>

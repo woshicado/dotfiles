@@ -45,6 +45,7 @@ return {
 	require("plugins.configs.kanagawa"),
 	-- require("plugins.configs.oil-git"),  -- performance
 	-- require("plugins.configs.leap"),
+	require("plugins.configs.lean"),
 	require("plugins.configs.repeat"),
 	require("plugins.configs.speeddating"),
 	require("plugins.configs.auto-session"),

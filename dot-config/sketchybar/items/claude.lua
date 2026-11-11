@@ -29,11 +29,17 @@ local ICON = app_icons["Claude"]
 -- line (it asks Anthropic's usage endpoint at most every 5 minutes while a
 -- session is open), so nothing here touches the API or the login token. The
 -- catch: the numbers only move while Claude Code is running somewhere.
-local USAGE_FILE = os.getenv("HOME") .. "/.cache/ccstatusline/usage.json"
+--
+-- Newer ccstatusline versions keep one cache per Claude config dir
+-- (usage-<hash>.json) and no longer write the plain usage.json, so take
+-- whichever is newest.
+local USAGE_GLOB = os.getenv("HOME") .. "/.cache/ccstatusline/usage*.json"
 -- A limit whose reset time has passed counts as 0 until the cache says otherwise.
-local USAGE_CMD = "jq -c --argjson now \"$(/bin/date +%s)\" --argjson mtime \"$(/usr/bin/stat -f %m "
-  .. USAGE_FILE
-  .. ")\" 'def ts: sub(\"\\\\.[0-9]+\";\"\") | sub(\"\\\\+00:00$\";\"Z\") | fromdateiso8601; "
+local USAGE_CMD = "f=$(/bin/ls -t "
+  .. USAGE_GLOB
+  .. " 2>/dev/null | /usr/bin/head -n 1); "
+  .. "jq -c --argjson now \"$(/bin/date +%s)\" --argjson mtime \"$(/usr/bin/stat -f %m \"$f\")\" "
+  .. "'def ts: sub(\"\\\\.[0-9]+\";\"\") | sub(\"\\\\+00:00$\";\"Z\") | fromdateiso8601; "
   .. "(.sessionResetAt|ts) as $s | (.weeklyResetAt|ts) as $w | "
   .. "{session: (if $s < $now then 0 else .sessionUsage end), "
   .. "weekly: (if $w < $now then 0 else .weeklyUsage end), "
@@ -41,7 +47,7 @@ local USAGE_CMD = "jq -c --argjson now \"$(/bin/date +%s)\" --argjson mtime \"$(
   .. "session_reset: (if $s < $now then \"\" else ($s + 30 | strflocaltime(\"%H:%M\")) end), "
   .. "weekly_reset: (if $w < $now then \"\" else ($w + 30 | strflocaltime(\"%a %H:%M\")) end), "
   .. "age: ($now - $mtime)}' "
-  .. USAGE_FILE
+  .. "\"$f\""
   .. " 2>/dev/null"
 local DIM = 0xff7f8490
 

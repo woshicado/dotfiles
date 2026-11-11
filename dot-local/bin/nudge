@@ -1,0 +1,3 @@
+#!/bin/sh
+# Matrix notifications for agents — see ~/.claude/nudge/README.md
+exec python3 "$HOME/.claude/nudge/nudge.py" "$@"

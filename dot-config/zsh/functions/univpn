@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+# Connect to the UdS VPN without any password prompt.
+# Password comes from the login keychain; the root side (route cleanup +
+# openconnect) is /usr/local/sbin/univpn-connect, allowed via NOPASSWD sudo.
+# One-time setup on a new machine: ~/dotfiles/etc/univpn/install.sh
+univpn() {
+  security find-generic-password -a s8jjmeye -s univpn -w \
+    | sudo /usr/local/sbin/univpn-connect
+}

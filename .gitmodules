@@ -4,9 +4,9 @@
 [submodule "treesitter-mail"]
 	path = dot-config/nvim/custom/tree-sitter-mail
 	url = git@github.com:Woshicado/tree-sitter-mail.git
-[submodule "dot-claude/review-bot"]
-	path = dot-claude/review-bot
-	url = git@github.com:Woshicado/review-bot.git
 [submodule "skills"]
 	path = skills
 	url = git@github.com:woshicado/skills.git
+[submodule "dot-claude"]
+	path = dot-claude
+	url = git@github.com:Woshicado/claude-config.git
