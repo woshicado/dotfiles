@@ -6,7 +6,7 @@ local display = require("helpers.display")
 -- Apps to track. Identical for every display, so this and the derived query
 -- buckets below live at module scope and the queries run ONCE per tick — the
 -- results are fanned out to each display's badge (see the shared updater at the
--- bottom). Previously every display polled the Dock/notmuch/mattermost itself,
+-- bottom). Previously every display polled the Dock/notmuch/matrix itself,
 -- multiplying the (expensive) osascript Dock scrape by the monitor count.
 local apps_to_track = {
 	{
@@ -19,12 +19,11 @@ local apps_to_track = {
 		count_command2 = "notmuch count --output=threads tag:important OR tag:todo",
 	},
 	{
-		name = "Mattermost",
-		-- I do not want to hit the API millions of times, but after opening I still want it to respon
-		-- and remove the notification, that I opened it. So I just don't use the API, but the dot for
-		-- normal messages. Mention count should be fine to get in 5 min intervals though, so I keep that.
-		-- count_command = os.getenv("HOME") .. "/.config/sketchybar/helpers/mattermost.sh" .. " | jq .msg_count",
-		count_command2 = os.getenv("HOME") .. "/.config/sketchybar/helpers/mattermost.sh" .. " | jq .mention_count",
+		-- Matrix. Cinny sets no Dock badge, so both counts come from the homeserver's /sync
+		-- (one cached request per tick, shared by the two commands).
+		name = "Cinny",
+		count_command = os.getenv("HOME") .. "/.config/sketchybar/helpers/matrix.sh" .. " | jq .msg_count",
+		count_command2 = os.getenv("HOME") .. "/.config/sketchybar/helpers/matrix.sh" .. " | jq .mention_count",
 	},
 	"Signal",
 	"WhatsApp",

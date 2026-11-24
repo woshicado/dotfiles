@@ -181,7 +181,7 @@ return {
 						pyflakes = { enabled = false },
 						yapf = { enabled = false },
 						rope = { enabled = false },
-						rope_autoimport = { enabled = true },
+						rope_autoimport = { enabled = false },
 						preload = { enabled = false },
 						pydocstyle = { enabled = false },
 						pylint = { enabled = false },

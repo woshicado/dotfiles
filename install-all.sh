@@ -21,6 +21,10 @@ esac
 
 ### SHARED STEPS (all platforms) #############################################
 
+# Private submodules must be checked out before stowing, or ~/.claude gets no
+# config at all (dot-claude = Woshicado/claude-config, skills = woshicado/skills).
+git submodule update --init dot-claude skills
+
 # Deploy the dotfiles as symlinks into $HOME. --no-folding keeps target dirs
 # real (so stray files can live next to symlinks); --dotfiles maps dot-* -> .*
 if command -v stow >/dev/null 2>&1; then
